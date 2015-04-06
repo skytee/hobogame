@@ -86,9 +86,9 @@ while 1:
 		scroll_pos *= -1
 		scroll_pos += (i*64) 
 		#screen.blit(ground[0], (scroll_pos, 288))
-		i %= len(ground_order)
-		j = i+(fg_pos/64)
-		img_num = ground_order[i+(fg_pos/64)] # select tile to blit
+		ground_tile = i+(fg_pos/64)
+		ground_tile %= len(ground_order)
+		img_num = ground_order[ground_tile] # select tile to blit
 		screen.blit(ground[img_num], (scroll_pos, 288))
 
 	# blit hobo
