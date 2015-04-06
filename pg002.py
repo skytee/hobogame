@@ -18,8 +18,21 @@ screen = pygame.display.set_mode(size) # create instance of: surface
 
 ground = []
 mountain = []
-ground.append(pygame.image.load("img/ground-stone.bmp").convert())
 ground.append(pygame.image.load("img/ground-grass.bmp").convert())
+ground.append(pygame.image.load("img/ground-grass2stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-stone2bridge.bmp").convert())
+ground.append(pygame.image.load("img/ground-bridge1.bmp").convert())
+ground.append(pygame.image.load("img/ground-bridge2.bmp").convert())
+ground.append(pygame.image.load("img/ground-bridge-pillar.bmp").convert())
+ground.append(pygame.image.load("img/ground-bridge2stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-dirt2stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-grass2stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-stone2bridge.bmp").convert())
+ground.append(pygame.image.load("img/ground-stone2dirt.bmp").convert())
+ground.append(pygame.image.load("img/ground-dirt.bmp").convert())
+ground.append(pygame.image.load("img/ground-dirt2stone.bmp").convert())
+ground.append(pygame.image.load("img/ground-stone2grass.bmp").convert())
 mountain.append(pygame.image.load("img/mountain-flat.bmp").convert())
 mountain.append(pygame.image.load("img/mountainglacier.bmp").convert())
 mountain.append(pygame.image.load("img/mountain-kermit.bmp").convert())
@@ -28,6 +41,7 @@ mountain.append(pygame.image.load("img/mountain-m.bmp").convert())
 hoboimg = pygame.image.load("img/hobo.png").convert()
 
 bg_order = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 ];
+ground_order = [ 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 4, 5, 6, 4, 5, 7, 2, 2, 2, 2, 2, 2, 2, 2, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 2, 2, 2, 2, 14, 0, 0, 0]
 
 # set transparency
 transColor = hoboimg.get_at((0,0))
@@ -71,7 +85,11 @@ while 1:
 		scroll_pos = fg_pos % 64 
 		scroll_pos *= -1
 		scroll_pos += (i*64) 
-		screen.blit(ground[0], (scroll_pos, 288))
+		#screen.blit(ground[0], (scroll_pos, 288))
+		i %= len(ground_order)
+		j = i+(fg_pos/64)
+		img_num = ground_order[i+(fg_pos/64)] # select tile to blit
+		screen.blit(ground[img_num], (scroll_pos, 288))
 
 	# blit hobo
 	if hobo_move == 0:
