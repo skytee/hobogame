@@ -40,8 +40,8 @@ mountain.append(pygame.image.load("img/mountain-m.bmp").convert())
 
 hoboimg = pygame.image.load("img/hobo.png").convert()
 
-bg_order = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 ];
-ground_order = [ 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 4, 5, 6, 4, 5, 7, 2, 2, 2, 2, 2, 2, 2, 2, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 2, 2, 2, 2, 14, 0, 0, 0]
+mountain_map = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 ];
+ground_map = [ 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 4, 5, 6, 4, 5, 7, 2, 2, 2, 2, 2, 2, 2, 2, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 2, 2, 2, 2, 14, 0, 0, 0]
 
 # set transparency
 transColor = hoboimg.get_at((0,0))
@@ -76,7 +76,9 @@ while 1:
 		scroll_pos = bg_pos % 160 # account for tile width 
 		scroll_pos *= -1 # deduct part of img out of screen
 		scroll_pos += (i*160) # account for tiles blitted
-		img_num = bg_order[i+(bg_pos/160)] # select tile to blit
+		tile = i+(bg_pos/160) # select tile from map
+		tile %= len(mountain_map) # wrap around
+		img_num = mountain_map[tile] # select tile to blit
 		screen.blit(mountain[img_num], (scroll_pos, 0))
 
 	# blit ground tiles (10 fully and 2 partially visible)
@@ -85,10 +87,9 @@ while 1:
 		scroll_pos = fg_pos % 64 
 		scroll_pos *= -1
 		scroll_pos += (i*64) 
-		#screen.blit(ground[0], (scroll_pos, 288))
-		ground_tile = i+(fg_pos/64)
-		ground_tile %= len(ground_order)
-		img_num = ground_order[ground_tile] # select tile to blit
+		tile = i+(fg_pos/64)
+		tile %= len(ground_map)
+		img_num = ground_map[tile]
 		screen.blit(ground[img_num], (scroll_pos, 288))
 
 	# blit hobo
@@ -104,16 +105,6 @@ while 1:
 			screen.blit(hobo[i], (200, 240) )
 		else:
 			screen.blit(hobo[13-i], (200, 240) )
-	
-
-#	ballrect = ballrect.move(speed);
-#	if ballrect.left < 0 or ballrect.right > width:
-#		speed[0] = -speed[0]
-#	if ballrect.top < 0 or ballrect.bottom > height:
-#		speed[1] = - speed[1]
-#
-#	screen.blit(background, (0, 0))
-#	screen.blit(ball, ballrect)
 
 	# update display, wait for frame and move forward
 	pygame.display.flip()
