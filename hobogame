@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import pygame
+import pygame, sys
 from pygame.locals import *
 pygame.init()
 pygame.font.init()
@@ -10,6 +10,8 @@ black = 0, 0, 0
 map_position = 0
 map_direction = 0
 hobo_move = 0
+hobo_x = 200
+car_x = 160
 fg_speed = 3
 bg_speed = 1
 
@@ -39,6 +41,7 @@ mountain.append(pygame.image.load("img/mountain-kermit.bmp").convert())
 mountain.append(pygame.image.load("img/mountain-m.bmp").convert())
 
 hoboimg = pygame.image.load("img/hobo.png").convert()
+carimg = pygame.image.load("img/car.png").convert()
 
 mountain_map = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 ];
 ground_map = [ 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 4, 5, 6, 4, 5, 7, 2, 2, 2, 2, 2, 2, 2, 2, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13, 2, 2, 2, 2, 14, 0, 0, 0]
@@ -46,7 +49,8 @@ ground_map = [ 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 3, 4, 5, 6, 4, 5, 6, 4,
 # set transparency
 transColor = hoboimg.get_at((0,0))
 hoboimg.set_colorkey(transColor)
-screen.set_colorkey(transColor)
+transColor = carimg.get_at((0,0))
+carimg.set_colorkey(transColor)
 
 hobo = []
 for i in range (0, 14):
@@ -95,16 +99,18 @@ while 1:
 	# blit hobo
 	if hobo_move == 0:
 		if map_direction >= 0 :
-			screen.blit(hobo[6], (200, 240) )
+			screen.blit(hobo[6], (hobo_x, 240) )
 		else:
-			screen.blit(hobo[7], (200, 240) )
+			screen.blit(hobo[7], (hobo_x, 240) )
 	else:
 		fg_pos = map_position/4;
 		i = fg_pos % 6
 		if map_direction == 1:
-			screen.blit(hobo[i], (200, 240) )
+			screen.blit(hobo[i], (hobo_x, 240) )
 		else:
-			screen.blit(hobo[13-i], (200, 240) )
+			screen.blit(hobo[13-i], (hobo_x, 240) )
+
+	#screen.blit(carimg, (car_x, 240))
 
 	# update display, wait for frame and move forward
 	pygame.display.flip()
