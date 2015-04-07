@@ -71,8 +71,11 @@ while 1:
 		elif event.type == KEYDOWN and event.key == K_LEFT:
 			map_direction = -1
 			hobo_move = 1
-		elif event.type == KEYUP:
+		elif event.type == KEYUP and event.key==K_LEFT  and map_direction<0:
 			hobo_move = 0
+		elif event.type == KEYUP and event.key==K_RIGHT and map_direction>0:
+			hobo_move = 0
+                
 	
 	# blit background tiles (3 fully and 2 partially visible)
 	for i in range (0, 5):
