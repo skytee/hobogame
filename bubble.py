@@ -5,6 +5,11 @@ from pygame.locals import *
 
 if not pygame.font: print "Warning, fonts disabled"
 
+# USAGE: 
+# b = Bubble("Wassup?\nNot much!", None, (0,0,0))
+# b.move((400,10))
+# b.render(surface)
+
 class Bubble(object):
 
 	def __init__(self, text=None, font=None, fontcolor=None, backgroundcolor=None, bordercolor=None):
@@ -13,7 +18,7 @@ class Bubble(object):
 		if not font:		
 			font = pygame.font.Font(None, 36)
 		if not fontcolor:
-			fontcolor = (255, 0, 0)
+			fontcolor = (0, 0, 128)
 		if not backgroundcolor:
 			backgroundcolor = (255, 255, 255)
 		if not bordercolor:

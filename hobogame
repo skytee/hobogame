@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import pygame, sys
 from pygame.locals import *
+from bubble import Bubble
 pygame.init()
 pygame.font.init()
 
@@ -115,7 +116,12 @@ while 1:
 
 	#screen.blit(carimg, (car_x, 240))
 
+	b = Bubble("Howdy neighbor!")
+	b.move((hobo_x+30, 180))
+	b.render(screen)
+
 	# update display, wait for frame and move forward
+	
 	pygame.display.flip()
 	pygame.time.delay(33)
 	if hobo_move == 1:
